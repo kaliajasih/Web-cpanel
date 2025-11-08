@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Create Panel</title>
+<style>
+  body {
+    background-color: #e6f0ff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+  }
+  .panel-container {
+    background: white;
+    border-radius: 20px;
+    padding: 25px 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  h2 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #2a64d6;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: #212529;
+  }
+  select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #f8f9fa;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #212529;
+  }
+  button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px;
+    background-color: #d0d4d8;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #b0b5bb;
+  }
+</style>
+</head>
+<body>
+
+<div class="panel-container">
+  <h2>Create New Panel</h2>
+  <form id="createPanelForm">
+    <label for="server">Server</label>
+    <select id="server" name="server" required>
+      <option value="" disabled selected>Select server...</option>
+      <option value="Server 1">Server 1</option>
+      <option value="Server 2">Server 2</option>
+    </select>
+    
+    <label for="ram">RAM</label>
+    <select id="ram" name="ram" required>
+      <option value="1GB" selected>1GB</option>
+      <option value="2GB">2GB</option>
+      <option value="4GB">4GB</option>
+    </select>
+    
+    <button type="submit">+ Create Panel</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('createPanelForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Ambil nilai pilihan user
+    const server = document.getElementById('server').value;
+    const ram = document.getElementById('ram').value;
+
+    // Buat data akun (contoh data dummy, bisa disesuaikan dengan backend)
+    const accountData = {
+      username: "user_" + Math.floor(Math.random() * 10000),  // contoh username random
+      password: Math.random().toString(36).slice(-8),          // password random 8 karakter
+      serverAccess: `https://${server.toLowerCase().replace(/\s/g, '')}.example.com`,
+      server,
+      ram
+    };
+
+    // Simpan data ke localStorage supaya bisa diakses halaman detail
+    localStorage.setItem('accountData', JSON.stringify(accountData));
+
+    // Pindah ke halaman detail akun
+    window.location.href = 'account-details.html';
+  });
+</script>
+
+</body>
+  </html>
