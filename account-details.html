@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pterodactyl Account Details</title>
+<style>
+  body {
+    background-color: #e6f0ff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .account-details {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  h1 {
+    color: #2a64d6;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+  .detail-label {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    text-align: left;
+  }
+  .detail-value {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+    padding-left: 12px;
+    text-align: left;
+  }
+  .btn-back {
+    display: inline-block;
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px 0;
+    background-color: #d0d4d8;
+    color: #333;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn-back:hover {
+    background-color: #b0b5bb;
+  }
+  a {
+    color: #2a64d6;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="account-details">
+  <h1>Your Pterodactyl Account Details</h1>
+  
+  <div>
+    <div class="detail-label">Username:</div>
+    <div class="detail-value" id="username">-</div>
+  </div>
+  
+  <div>
+    <div class="detail-label">Password:</div>
+    <div class="detail-value" id="password">-</div>
+  </div>
+  
+  <div>
+    <div class="detail-label">Access Your Server:</div>
+    <div class="detail-value" id="serverAccess">-</div>
+  </div>
+  
+  <button class="btn-back" id="backBtn">Back to Create Panel</button>
+</div>
+
+<script>
+  // Ambil data akun dari localStorage
+  const storedData = localStorage.getItem('accountData');
+  const accountData = storedData ? JSON.parse(storedData) : null;
+
+  if(accountData){
+    document.getElementById('username').textContent = accountData.username;
+    document.getElementById('password').textContent = accountData.password;
+    document.getElementById('serverAccess').innerHTML = `<a href="${accountData.serverAccess}" target="_blank">${accountData.serverAccess}</a>`;
+  } else {
+    // Jika tidak ada data simpan, tampilkan pesan kosong
+    document.getElementById('username').textContent = 'N/A';
+    document.getElementById('password').textContent = 'N/A';
+    document.getElementById('serverAccess').textContent = 'N/A';
+  }
+
+  // Tombol kembali ke halaman create panel
+  document.getElementById('backBtn').addEventListener('click', () => {
+    window.location.href = 'create-panel.html';
+  });
+</script>
+
+</body>
+</html>
